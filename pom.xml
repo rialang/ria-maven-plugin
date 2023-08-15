@@ -82,6 +82,10 @@
                 </configuration>
                 <executions>
                     <execution>
+                        <id>default-descriptor</id>
+                        <phase>process-classes</phase>
+                    </execution>
+                    <execution>
                         <id>mojo-descriptor</id>
                         <goals>
                             <goal>descriptor</goal>
