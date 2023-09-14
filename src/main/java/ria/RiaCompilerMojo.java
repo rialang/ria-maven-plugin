@@ -5,7 +5,6 @@ import org.apache.maven.artifact.DependencyResolutionRequiredException;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.descriptor.PluginDescriptor;
-import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
@@ -18,10 +17,14 @@ import java.net.MalformedURLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * This class is a Maven plugin that compiles Ria source files. It is executed during the compile phase of the Maven build lifecycle.
+ * It takes the source directories containing the sources to be compiled, the directory for compiled classes, and the classpath as input parameters.
+ * It then compiles the Ria source files using the Ria compiler and outputs the compiled classes to the specified output directory.
+ */
 @Mojo(name = "compile", defaultPhase = LifecyclePhase.COMPILE, threadSafe = true, requiresDependencyResolution = ResolutionScope.COMPILE)
 public class RiaCompilerMojo extends AbstractMojo {
 
-    @Component
     @Parameter(defaultValue = "${project}", readonly = true, required = true)
     private MavenProject project;
 
@@ -37,9 +40,15 @@ public class RiaCompilerMojo extends AbstractMojo {
     @Parameter(defaultValue = "${project.build.outputDirectory}", required = true, readonly = true)
     private File outputDirectory;
 
-    @Component
     @Parameter( defaultValue = "${plugin}", readonly = true )
     private PluginDescriptor descriptor;
+
+    /**
+     * Constructs a new instance of the RiaCompilerMojo class.
+     */
+    public RiaCompilerMojo() {
+        super();
+    }
 
     public void execute() throws MojoExecutionException {
 
